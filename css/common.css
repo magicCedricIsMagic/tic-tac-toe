@@ -43,15 +43,6 @@
 		}
 	}
 
-	/* --size-3xs: 0.25rem;
-	--size-2xs: 0.5rem;
-	--size-xs: 1rem;
-	--size-sm: 2rem;
-	--size-md: 3rem;
-	--size-lg: 5rem;
-	--size-xl: 7.5rem;
-	--size-2xl: 10rem;
-	--size-3xl: 15rem; */
 	--size-3xs: calc(var(--size-2xs) / var(--size-growth-factor));
 	--size-2xs: calc(var(--size-xs) / var(--size-growth-factor));
 	--size-xs: calc(var(--size-sm) / var(--size-growth-factor));
