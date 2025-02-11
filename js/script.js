@@ -2,11 +2,14 @@ import game from "/js/game.js"
 
 game.init("Jean", "Michel")
 
-game.play(4)
-game.play(0)
-game.play(2)
-game.play(6)
-game.play(5)
-game.play(3)
+const _boxes = document.querySelectorAll(".box")
+for (let _box of _boxes) {
+	_box.addEventListener("click", (e) => {
+		game.play(e.target.dataset.boxIndex)
+	})
+}
 
-game.reset()	
+const _resetButton = document.querySelector(".reset")
+_resetButton.addEventListener("click", () => {
+	game.reset()
+})

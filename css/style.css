@@ -3,3 +3,51 @@
 :root {
 	font-family: "Lexend", sans-serif;
 }
+
+.game {
+	display: grid;
+	grid-template-columns: 1fr 4fr 1fr;
+	min-height: 100dvh;
+}
+
+.player-area {
+	--col-player: var(--col-primary);
+	padding: var(--size-xl) var(--size-lg);
+	text-align: center;
+	color: var(--col-white);
+	background-color: var(--col-player);
+}
+.player-area--two {
+	--col-player: var(--col-secondary);
+}
+
+.main-area {
+	padding: var(--size-xl) var(--size-2xl);
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	gap: var(--size-lg);
+}
+
+.game-board {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	width: min(62dvh, 62dvw);
+	height: min(62dvh, 62dvw);
+	gap: var(--size-3xs);
+	background-color: var(--col-light-gray);
+}
+
+.box {
+	cursor: pointer;
+	background-color: var(--col-lightest-gray);
+	border-width: 0;
+	padding: var(--size-lg);
+	margin: unset;
+	transition: var(--transition-quick);
+
+	&:hover {
+		background-color: var(--col-lighter-gray);
+	}
+}

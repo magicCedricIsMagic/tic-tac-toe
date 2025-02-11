@@ -12,10 +12,30 @@
 </head>
 
 <body>
-	<main class="main">
-		<h1 class="text-3xl text-bold">Tic Tac Toe</h1>
-	</main>
 
+	<section class="game">
+		<aside class="player-area player-area--one">
+			<h2 class="text-xl">Player One</h2>
+		</aside>
+		<main class="main-area">
+			<h1 class="text-3xl text-bold">Tic Tac Toe</h1>
+			<section class="game-board">
+				<button class="box" data-box-index="0"></button>
+				<button class="box" data-box-index="1"></button>
+				<button class="box" data-box-index="2"></button>
+				<button class="box" data-box-index="3"></button>
+				<button class="box" data-box-index="4"></button>
+				<button class="box" data-box-index="5"></button>
+				<button class="box" data-box-index="6"></button>
+				<button class="box" data-box-index="7"></button>
+				<button class="box" data-box-index="8"></button>
+			</section>
+			<button class="button button--danger reset">Reset</button>
+		</main>
+		<aside class="player-area player-area--two">
+			<h2 class="text-xl">Player Two</h2>
+		</aside>
+	</section>
 	<script type="module" src="/js/script.js"></script>
 </body>
 

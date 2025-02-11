@@ -6,25 +6,32 @@ export default (function game() {
 	let turn = 0
 
 	const players = []
-	function createPlayer(name) {
-		let markType = !players.length ? "X" : "O"
+	function createPlayer(name, markType) {
 		let score = 0
 		return { name, markType, score }
 	}
 
 	function init(name1, name2) {
 		players.push(
-			createPlayer(name1),
-			createPlayer(name2)
+			createPlayer(name1, "X"),
+			createPlayer(name2, "O")
 		)
+		console.log({ players })
 		canPlay = true
+	}
+
+	function getCurrentPlayer() {
+		return turn % 2 !== 0 ? players[0] : players[1]
+	}
+	function getNextPlayer() {
+		return turn % 2 === 0 ? players[0] : players[1]
 	}
 
 	function play(position) {
 		if (canPlay) {
 			turn++
-			const currentPlayer = turn % 2 !== 0 ? players[0] : players[1]
-			const nextPlayer = turn % 2 === 0 ? players[0] : players[1]
+			const currentPlayer = getCurrentPlayer()
+			const nextPlayer = getNextPlayer()
 			gameBoard.draw(
 				currentPlayer.markType,
 				position
@@ -35,7 +42,7 @@ export default (function game() {
 				canPlay = false
 			}
 			else {
-				if (turn === gameBoard.grid.length) {
+				if (turn === gameBoard.getGrid().length) {
 					console.log(`Nobody wins :/`)
 					canPlay = false
 				}
@@ -62,7 +69,8 @@ export default (function game() {
 		]
 
 		let checkedBoxes = []
-		gameBoard.grid.map((box, index) => {
+		console.log("gameBoard.getGrid()", gameBoard.getGrid())
+		gameBoard.getGrid().map((box, index) => {
 			if (box === markType) checkedBoxes.push(index)
 		})
 
@@ -72,8 +80,11 @@ export default (function game() {
 	}
 
 	function reset() {
+		console.log("RESET")
+		gameBoard.erase()
 		turn = 0
-		gameBoard.grid = gameBoard.grid.map(box => box = "")
+		canPlay = true
+		console.log("gameBoard.getGrid()", gameBoard.getGrid())
 	}
 
 	return { init, play, canPlay, reset }
