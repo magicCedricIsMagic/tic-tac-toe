@@ -2,10 +2,10 @@ import gameBoard from "/js/gameBoard.js"
 import ui from "/js/ui.js"
 
 export default (function game() {
+	const players = []
 	let canPlay = false
 	let turn = 0
 
-	const players = []
 	function createPlayer(name, markType) {
 		let score = 0
 		return { name, markType, score }
@@ -25,15 +25,16 @@ export default (function game() {
 	function getCurrentPlayer() {
 		return turn % 2 !== 0 ? players[0] : players[1]
 	}
+
 	function getNextPlayer() {
 		return turn % 2 === 0 ? players[0] : players[1]
 	}
 
 	function play(position) {
 		if (canPlay) {
-			turn++
 			const currentPlayer = getCurrentPlayer()
 			const nextPlayer = getNextPlayer()
+			turn++
 			gameBoard.draw(
 				currentPlayer.markType,
 				position
@@ -80,15 +81,17 @@ export default (function game() {
 			[0, 4, 8],
 			[2, 4, 6],
 		]
-
 		let checkedBoxes = []
+
 		gameBoard.getGrid().map((box, index) => {
 			if (box === markType) checkedBoxes.push(index)
 		})
 
-		return winningCombinations.some((wC) => (
-			wC.every(box => checkedBoxes.includes(box))
-		))
+		return (
+			winningCombinations.some((wC) => (
+				wC.every(box => checkedBoxes.includes(box))
+			))
+		)
 	}
 
 	function reset() {

@@ -2,6 +2,10 @@ import game from "/js/game.js"
 
 export default (function ui() {
 	const _playerAreas = document.querySelectorAll(".player-area")
+	const _boxes = document.querySelectorAll(".box")
+	const _resetButton = document.querySelector(".reset")
+	const _alert = document.querySelector(".alert")
+	let timeoutMessage
 
 	function setPlayersNames(players) {
 		players.map((player, index) => {
@@ -9,19 +13,11 @@ export default (function ui() {
 			_playerAreas[index].querySelector(".player__mark-type").textContent = player.markType
 		})
 	}
+
 	function updatePlayersScores(players) {
 		players.map((player, index) => {
 			console.log({player})
 			_playerAreas[index].querySelector(".player__score").textContent = player.score
-		})
-	}
-
-	const _boxes = document.querySelectorAll(".box")
-	for (let _box of _boxes) {
-		_box.addEventListener("click", (e) => {
-			if (!_box.textContent) {
-				game.play(e.target.dataset.boxIndex)
-			}
 		})
 	}
 
@@ -30,9 +26,6 @@ export default (function ui() {
 		_box.textContent = markType
 	}
 
-	const _alert = document.querySelector(".alert")
-
-	let timeoutMessage
 	function displayMessage(message, autohide = true, classList=["primary"]) {
 		clearTimeout(timeoutMessage)
 		_alert.textContent = message
@@ -49,11 +42,18 @@ export default (function ui() {
 		_alert.classList.add("hidden")
 	}
 
+	for (let _box of _boxes) {
+		_box.addEventListener("click", (e) => {
+			if (!_box.textContent) {
+				game.play(e.target.dataset.boxIndex)
+			}
+		})
+	}
+
 	_alert.addEventListener("click", (e) => {
 		hideMessage()
 	})
 
-	const _resetButton = document.querySelector(".reset")
 	_resetButton.addEventListener("click", () => {
 		game.reset()
 	})

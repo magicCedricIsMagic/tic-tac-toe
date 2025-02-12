@@ -3,6 +3,8 @@ import ui from "/js/ui.js"
 export default (function gameBoard() {
 	let grid = ["", "", "", "", "", "", "", "", ""]
 
+	const getGrid = () => grid
+
 	function draw(markType, position) {
 		grid[position] = markType
 		ui.drawInBox(position, markType)
@@ -14,8 +16,6 @@ export default (function gameBoard() {
 			ui.drawInBox(index, "")
 		})
 	}
-
-	const getGrid = () => grid
 
 	return { getGrid, draw, erase }
 })()
