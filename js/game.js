@@ -41,7 +41,7 @@ export default (function game() {
 			if (checkForWin(currentPlayer.markType)) {
 				ui.displayMessage(
 					`${currentPlayer.name} wins!`,
-					false,
+					true,
 					["success", "super"]
 				)
 				currentPlayer.score++
@@ -52,7 +52,7 @@ export default (function game() {
 				if (turn === gameBoard.getGrid().length) {
 					ui.displayMessage(
 						`Nobody wins :/`,
-						false,
+						true,
 						["warning", "super"]
 					)
 					canPlay = false

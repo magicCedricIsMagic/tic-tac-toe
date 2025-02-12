@@ -38,7 +38,6 @@ export default (function ui() {
 		_alert.textContent = message
 		_alert.classList = `alert`
 		classList.map(className => _alert.classList.add(`alert--${className}`))
-
 		if (!!autohide) {
 			timeoutMessage = setTimeout(() => {
 				_alert.classList.add("hidden")

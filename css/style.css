@@ -82,8 +82,6 @@
 	--col-alert: var(--col-gray);
 	cursor: pointer;
 	position: fixed;
-	/* top: 0;
-	bottom: 0; */
 	top: var(--size-lg);
 	margin-block: auto;
 	height: fit-content;
@@ -92,7 +90,7 @@
 	padding: var(--size-md) var(--size-xl);
 	font-size: var(--text-lg);
 	border-radius: var(--size-xs);
-	transition: var(--transition-slow);
+	transition: all var(--transition-slow), color var(--transition-quick), background-color var(--transition-quick);
 	&.hidden {
 		opacity: 0;
 		visibility: hidden;
