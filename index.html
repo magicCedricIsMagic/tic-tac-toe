@@ -15,10 +15,12 @@
 
 	<section class="game">
 		<aside class="player-area player-area--one">
-			<h2 class="text-xl">Player One</h2>
+			<p class="player__mark-type"></p>
+			<h2 class="player__name"></h2>
+			<h3 class="player__score"></h3>
 		</aside>
 		<main class="main-area">
-			<h1 class="text-3xl text-bold">Tic Tac Toe</h1>
+			<h1 class="text-2xl text-bold">Tic Tac Toe</h1>
 			<section class="game-board">
 				<button class="box" data-box-index="0"></button>
 				<button class="box" data-box-index="1"></button>
@@ -31,9 +33,12 @@
 				<button class="box" data-box-index="8"></button>
 			</section>
 			<button class="button button--danger reset">Reset</button>
+			<div class="alert hidden"></div>
 		</main>
 		<aside class="player-area player-area--two">
-			<h2 class="text-xl">Player Two</h2>
+			<p class="player__mark-type"></p>
+			<h2 class="player__name"></h2>
+			<h3 class="player__score"></h3>
 		</aside>
 	</section>
 	<script type="module" src="/js/script.js"></script>

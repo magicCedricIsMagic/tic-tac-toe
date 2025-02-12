@@ -16,8 +16,10 @@ export default (function game() {
 			createPlayer(name1, "X"),
 			createPlayer(name2, "O")
 		)
-		console.log({ players })
 		canPlay = true
+		ui.setPlayersNames(players)
+		ui.updatePlayersScores(players)
+		ui.displayMessage(`Turn: ${name1}`)
 	}
 
 	function getCurrentPlayer() {
@@ -37,22 +39,33 @@ export default (function game() {
 				position
 			)
 			if (checkForWin(currentPlayer.markType)) {
-				console.log(`${currentPlayer.name} wins!`)
+				ui.displayMessage(
+					`${currentPlayer.name} wins!`,
+					false,
+					["success", "super"]
+				)
 				currentPlayer.score++
+				ui.updatePlayersScores(players)
 				canPlay = false
 			}
 			else {
 				if (turn === gameBoard.getGrid().length) {
-					console.log(`Nobody wins :/`)
+					ui.displayMessage(
+						`Nobody wins :/`,
+						false,
+						["warning", "super"]
+					)
 					canPlay = false
 				}
 				else {
-					console.log(`Turn: ${nextPlayer.name}`)
+					ui.displayMessage(
+						`Turn: ${nextPlayer.name}`,
+						true,
+						[turn % 2 !== 0 ? "secondary" : "primary"]
+					)
 				}
 			}
-			if (!canPlay) {
-				console.log(ui.getScores(players[0], players[1]))
-			}
+
 		}
 	}
 
@@ -69,7 +82,6 @@ export default (function game() {
 		]
 
 		let checkedBoxes = []
-		console.log("gameBoard.getGrid()", gameBoard.getGrid())
 		gameBoard.getGrid().map((box, index) => {
 			if (box === markType) checkedBoxes.push(index)
 		})
@@ -80,11 +92,10 @@ export default (function game() {
 	}
 
 	function reset() {
-		console.log("RESET")
+		ui.displayMessage(`Turn: ${players[0].name}`)
 		gameBoard.erase()
 		turn = 0
 		canPlay = true
-		console.log("gameBoard.getGrid()", gameBoard.getGrid())
 	}
 
 	return { init, play, canPlay, reset }

@@ -11,20 +11,42 @@
 }
 
 .player-area {
+	position: relative;
 	--col-player: var(--col-primary);
 	padding: var(--size-xl) var(--size-lg);
 	text-align: center;
 	color: var(--col-white);
 	background-color: var(--col-player);
+	overflow: hidden;
 }
 .player-area--two {
 	--col-player: var(--col-secondary);
 }
 
+.player__mark-type {
+	position: absolute;
+	pointer-events: none;
+	left: 0;
+	right: 0;
+  display: flex;
+  justify-content: center;
+	opacity: 0.1;
+	font-size: calc(var(--text-3xl) * 5);
+	font-weight: var(--text-bold);
+}
+.player__name {
+	font-size: var(--text-lg);
+}
+.player__score {
+	font-size: var(--text-3xl);
+	line-height: 1.1;
+}
+
 .main-area {
-	padding: var(--size-xl) var(--size-2xl);
+	padding: var(--size-lg) var(--size-2xl);
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	text-align: center;
 	align-items: center;
 	gap: var(--size-lg);
@@ -47,7 +69,52 @@
 	margin: unset;
 	transition: var(--transition-quick);
 
+	font-size: var(--text-2xl);
+	font-weight: var(--text-bold);
+	line-height: 0;
+
 	&:hover {
 		background-color: var(--col-lighter-gray);
 	}
+}
+
+.alert {
+	--col-alert: var(--col-gray);
+	cursor: pointer;
+	position: fixed;
+	/* top: 0;
+	bottom: 0; */
+	top: var(--size-lg);
+	margin-block: auto;
+	height: fit-content;
+	color: color-mix(in srgb, var(--col-alert) 25%, var(--col-black));
+	background-color: color-mix(in srgb, var(--col-alert) 25%, var(--col-white));
+	padding: var(--size-md) var(--size-xl);
+	font-size: var(--text-lg);
+	border-radius: var(--size-xs);
+	transition: var(--transition-slow);
+	&.hidden {
+		opacity: 0;
+		visibility: hidden;
+		translate: 0 calc(-1 * var(--size-md));
+	}
+}
+.alert--primary {
+	--col-alert: var(--col-primary);
+}
+.alert--secondary {
+	--col-alert: var(--col-secondary);
+}
+.alert--success {
+	--col-alert: var(--col-success);
+}
+.alert--warning {
+	--col-alert: var(--col-warning);
+}
+.alert--danger {
+	--col-alert: var(--col-danger);
+}
+.alert--super {
+	color: var(--col-white);
+	background-color: var(--col-alert);
 }

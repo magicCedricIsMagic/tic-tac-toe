@@ -43,25 +43,28 @@
 		}
 	}
 
-	--size-3xs: calc(var(--size-2xs) / var(--size-growth-factor));
-	--size-2xs: calc(var(--size-xs) / var(--size-growth-factor));
-	--size-xs: calc(var(--size-sm) / var(--size-growth-factor));
-	--size-sm: calc(var(--size-md) / var(--size-growth-factor));
+	--golden-ratio: 1.618;
+	--size-3xs: calc(var(--size-2xs) / var(--golden-ratio));
+	--size-2xs: calc(var(--size-xs) / var(--golden-ratio));
+	--size-xs: calc(var(--size-sm) / var(--golden-ratio));
+	--size-sm: calc(var(--size-md) / var(--golden-ratio));
 	--size-md: 3rem;
-	--size-lg: calc(var(--size-md) * var(--size-growth-factor));
-	--size-xl: calc(var(--size-lg) * var(--size-growth-factor));
-	--size-2xl: calc(var(--size-xl) * var(--size-growth-factor));
-	--size-3xl: calc(var(--size-2xl) * var(--size-growth-factor));
-	--size-growth-factor: 1.62;
-
-	--text-xs: calc(var(--text-sm) / var(--text-growth-factor));
-	--text-sm: calc(var(--text-md) / var(--text-growth-factor));
+	--size-lg: calc(var(--size-md) * var(--golden-ratio));
+	--size-xl: calc(var(--size-lg) * var(--golden-ratio));
+	--size-2xl: calc(var(--size-xl) * var(--golden-ratio));
+	--size-3xl: calc(var(--size-2xl) * var(--golden-ratio));
+	
+	--text-xs: calc(var(--text-sm) / var(--golden-ratio));
+	--text-sm: calc(var(--text-md) / var(--golden-ratio));
 	--text-md: 1.8rem;
-	--text-lg: calc(var(--text-md) * var(--text-growth-factor));
-	--text-xl: calc(var(--text-lg) * var(--text-growth-factor));
-	--text-2xl: calc(var(--text-xl) * var(--text-growth-factor));
-	--text-3xl: calc(var(--text-2xl) * var(--text-growth-factor));
-	--text-growth-factor: 1.31;
+	--text-lg: calc(var(--text-md) * var(--golden-ratio));
+	--text-xl: calc(var(--text-lg) * var(--golden-ratio));
+	--text-2xl: calc(var(--text-xl) * var(--golden-ratio));
+	--text-3xl: calc(var(--text-2xl) * var(--golden-ratio));
+
+	--text-regular: 400;
+	--text-medium: 500;
+	--text-bold: 700;
 	
 	--clickables-min-height: 4.5rem;
 	--clickables-min-height-sm: 2.8rem;
@@ -150,13 +153,13 @@ pre {
 }
 
 .text-bold {
-	font-weight: 700;
+	font-weight: var(--text-bold);
 }
 .text-medium {
-	font-weight: 500;
+	font-weight: var(--text-medium);
 }
 .text-regular {
-	font-weight: 400;
+	font-weight: var(--text-regular);
 }
 .text-italic {
 	font-style: italic;
