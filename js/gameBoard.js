@@ -12,9 +12,7 @@ export default (function gameBoard() {
 
 	function erase() {
 		grid = grid.map(() => "")
-		grid.map((box, index) => {
-			ui.drawInBox(index, "")
-		})
+		ui.eraseBoxes()
 	}
 
 	return { getGrid, draw, erase }

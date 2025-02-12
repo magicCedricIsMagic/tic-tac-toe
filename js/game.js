@@ -2,9 +2,7 @@ import gameBoard from "/js/gameBoard.js"
 import ui from "/js/ui.js"
 
 export default (function game() {
-	const players = []
-	let canPlay = false
-	let turn = 0
+	let players, canPlay, turn, xFirst
 
 	function createPlayer(name, markType) {
 		let score = 0
@@ -12,6 +10,10 @@ export default (function game() {
 	}
 
 	function init(name1, name2) {
+		gameBoard.erase()
+		players = []
+		turn = 0
+		xFirst = true
 		players.push(
 			createPlayer(name1, "X"),
 			createPlayer(name2, "O")
@@ -19,15 +21,16 @@ export default (function game() {
 		canPlay = true
 		ui.setPlayersNames(players)
 		ui.updatePlayersScores(players)
+		ui.setPlayersColors()
 		ui.displayMessage(`Turn: ${name1}`)
 	}
 
 	function getCurrentPlayer() {
-		return turn % 2 !== 0 ? players[0] : players[1]
+		return turn % 2 !== 0 ? players[Number(xFirst)] : players[Number(!xFirst)]
 	}
 
 	function getNextPlayer() {
-		return turn % 2 === 0 ? players[0] : players[1]
+		return turn % 2 === 0 ? players[Number(xFirst)] : players[Number(!xFirst)]
 	}
 
 	function play(position) {
@@ -42,32 +45,43 @@ export default (function game() {
 			if (checkForWin(currentPlayer.markType)) {
 				ui.displayMessage(
 					`${currentPlayer.name} wins!`,
-					true,
-					["success", "super"]
+					[
+						(players.findIndex(player => (
+							player.markType === currentPlayer.markType
+						))) === 0 
+							? "primary" 
+							: "secondary",
+						"super",
+					],
+					true
 				)
 				currentPlayer.score++
 				ui.updatePlayersScores(players)
-				canPlay = false
+				endRound()
 			}
 			else {
 				if (turn === gameBoard.getGrid().length) {
 					ui.displayMessage(
 						`Nobody wins :/`,
-						true,
-						["warning", "super"]
+						["gray", "super"],
+						true
 					)
-					canPlay = false
+					endRound()
 				}
 				else {
 					ui.displayMessage(
 						`Turn: ${nextPlayer.name}`,
-						true,
-						[turn % 2 !== 0 ? "secondary" : "primary"]
+						[(players.findIndex(player => player.markType === nextPlayer.markType)) === 0 ? "primary" : "secondary"],
 					)
 				}
 			}
-
 		}
+	}
+
+	function endRound() {
+		xFirst = !xFirst
+		canPlay = false
+		ui.toggleGameButtons()
 	}
 
 	function checkForWin(markType) {
@@ -95,7 +109,10 @@ export default (function game() {
 	}
 
 	function reset() {
-		ui.displayMessage(`Turn: ${players[0].name}`)
+		ui.displayMessage(
+			`Turn: ${players[Number(!xFirst)].name}`,
+			[xFirst ? "primary" : "secondary"]
+		)
 		gameBoard.erase()
 		turn = 0
 		canPlay = true

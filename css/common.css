@@ -10,6 +10,7 @@
 	--col-danger: oklch(65% 0.225 20);
 	--col-transparent: oklch(100% 0 0 / 0);
 	
+	--col-primary-gray: color-mix(in srgb, var(--col-gray), var(--col-primary));
 	--col-light-gray: color-mix(in srgb, var(--col-gray), var(--col-white));
 	--col-lighter-gray: color-mix(in srgb, var(--col-gray) 25%, var(--col-white));
 	--col-lightest-gray: color-mix(in srgb, var(--col-gray) 12.5%, var(--col-white));
@@ -62,9 +63,10 @@
 	--text-2xl: calc(var(--text-xl) * var(--golden-ratio));
 	--text-3xl: calc(var(--text-2xl) * var(--golden-ratio));
 
+	--text-thin: 200;
 	--text-regular: 400;
-	--text-medium: 500;
-	--text-bold: 700;
+	--text-medium: 600;
+	--text-bold: 800;
 	
 	--clickables-min-height: 4.5rem;
 	--clickables-min-height-sm: 2.8rem;
@@ -344,15 +346,13 @@ p+p {
 	--btn-col-hover: color-mix(in srgb, var(--btn-col), var(--col-dark) 20%);
 	--btn-text-col: var(--col-white);
 
-	font-size: 1.8rem;
+	font-weight: var(--text-regular);
 	display: flex;
 	gap: var(--size-sm);
 	justify-content: center;
 	align-items: center;
-	min-height: var(--clickables-min-height);
-	padding: var(--size-2xs) var(--size-sm);
 	border: 1px solid var(--col-transparent);
-	border-radius: var(--size-md);
+	border-radius: 999rem;
 	color: var(--btn-text-col);
 	background-color: var(--btn-col);
 	text-wrap: balance;
@@ -369,6 +369,10 @@ p+p {
 	&:focus-visible {
 		outline: 2px solid color-mix(in srgb, var(--btn-col) 40%, var(--col-transparent));
 	}
+	&[hidden] {
+		opacity: 0;
+		visibility: hidden;
+	}
 }
 
 .button--outline {
@@ -384,17 +388,31 @@ p+p {
 	}
 }
 
+.button {
+	font-size: var(--text-md);
+	padding: var(--size-xs) var(--size-md);
+}
+.button--sm {
+	font-size: calc(var(--text-md) / 1.31);
+	padding: var(--size-2xs) var(--size-sm);
+}
+.button--lg,
+.button--xl {
+	font-weight: var(--text-medium);
+}
+.button--lg {
+	font-size: calc(var(--text-md) * 1.31);
+	padding: var(--size-sm) var(--size-lg);
+}
+.button--xl {
+	font-size: var(--text-lg);
+	padding: var(--size-md) var(--size-xl);
+}
+
 .button--primary {
 	--btn-col: var(--col-primary);
 	--btn-col-hover: color-mix(in srgb, var(--btn-col), var(--col-dark) 40%);
 }
-
-.button--sm {
-	min-height: var(--clickables-min-height-sm);
-	padding-inline: var(--size-xs);
-	font-size: 1.4rem;
-}
-
 .button--danger {
 	--btn-col: var(--col-danger);
 }
@@ -413,12 +431,13 @@ p+p {
 	--btn-text-col: var(--col-dark);
 }
 .button--light {
-	--btn-col: color-mix(in srgb, var(--col-white), var(--col-primary) 10%);
-	--btn-col-hover: color-mix(in srgb, var(--col-white), var(--col-primary) 20%);
+	--btn-col: color-mix(in srgb, var(--col-white), var(--col-gray) 15%);
+	--btn-col-hover: color-mix(in srgb, var(--col-white), var(--col-gray) 30%);
 	--btn-text-col: var(--col-dark);
 }
 .button--dark {
 	--btn-col: var(--col-dark);
+	--btn-col-hover: color-mix(in srgb, var(--col-dark), var(--col-white) 15%);
 }
 .button--gray {
 	--btn-col: var(--col-gray);

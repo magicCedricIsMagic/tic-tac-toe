@@ -49,7 +49,7 @@
 	justify-content: center;
 	text-align: center;
 	align-items: center;
-	gap: var(--size-lg);
+	gap: var(--size-md);
 }
 
 .game-board {
@@ -62,19 +62,38 @@
 }
 
 .box {
-	cursor: pointer;
-	background-color: var(--col-lightest-gray);
+	--col-box: var(--col-gray);
+	color: color-mix(in srgb, var(--col-box) 50%, var(--col-dark));
+	background-color: color-mix(in srgb, var(--col-box) 15%, var(--col-white));
 	border-width: 0;
 	padding: var(--size-lg);
 	margin: unset;
 	transition: var(--transition-quick);
-
+	
 	font-size: var(--text-2xl);
 	font-weight: var(--text-bold);
 	line-height: 0;
+	
+	&:empty {
+		cursor: pointer;
+		background-color: color-mix(in srgb, var(--col-box) 7.5%, var(--col-white));
+		&:hover {
+			background-color: color-mix(in srgb, var(--col-box) 15%, var(--col-white));
+		}
+	}
+}
 
-	&:hover {
-		background-color: var(--col-lighter-gray);
+.game-buttons {
+	display: flex;
+	align-items: center;
+	gap: var(--size-md);
+	transition: all var(--transition-slow), gap var(--transition-slow) var(--transition-quick);
+	&[hidden] {
+		gap: var(--size-2xs);
+		scale: 50%;
+		opacity: 0;
+		visibility: hidden;
+		transition: var(--transition-quick);
 	}
 }
 
@@ -82,14 +101,15 @@
 	--col-alert: var(--col-gray);
 	cursor: pointer;
 	position: fixed;
-	top: var(--size-lg);
+	z-index: 1;
+	bottom: var(--size-xl);
 	margin-block: auto;
 	height: fit-content;
 	color: color-mix(in srgb, var(--col-alert) 25%, var(--col-black));
 	background-color: color-mix(in srgb, var(--col-alert) 25%, var(--col-white));
 	padding: var(--size-md) var(--size-xl);
 	font-size: var(--text-lg);
-	border-radius: var(--size-xs);
+	border-radius: var(--size-sm);
 	transition: all var(--transition-slow), color var(--transition-quick), background-color var(--transition-quick);
 	&.hidden {
 		opacity: 0;
@@ -99,9 +119,11 @@
 }
 .alert--primary {
 	--col-alert: var(--col-primary);
+	margin-right: 67%;
 }
 .alert--secondary {
 	--col-alert: var(--col-secondary);
+	margin-left: 67%;
 }
 .alert--success {
 	--col-alert: var(--col-success);
@@ -112,7 +134,13 @@
 .alert--danger {
 	--col-alert: var(--col-danger);
 }
+.alert--gray {
+	--col-alert: var(--col-gray);
+}
 .alert--super {
+	margin-inline: unset;
+	transform: translateY(calc(-50dvh + 14.5rem));
 	color: var(--col-white);
+	/* background-color: color-mix(in srgb, var(--col-alert) 85%, var(--col-white)); */
 	background-color: var(--col-alert);
 }
