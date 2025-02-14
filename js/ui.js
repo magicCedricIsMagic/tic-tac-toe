@@ -83,7 +83,7 @@ export default (function ui() {
 	})
 
 	_changePlayersButton.addEventListener("click", () => {
-		game.init(prompt("Player one name"), prompt("Player two name"))
+		game.init()
 		toggleGameButtons()
 	})
 

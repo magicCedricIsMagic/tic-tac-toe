@@ -4,12 +4,20 @@ import ui from "/js/ui.js"
 export default (function game() {
 	let players, canPlay, turn, xFirst
 
+	function getName(nbPlayerText) {
+		let name = prompt(`Player ${nbPlayerText} name`) || ""
+		if (!name.trim().length) name = `Player ${nbPlayerText}`
+		return name
+	}
+
 	function createPlayer(name, markType) {
 		let score = 0
 		return { name, markType, score }
 	}
 
-	function init(name1, name2) {
+	function init() {
+		const name1 = getName("one")
+		const name2 = getName("two")
 		gameBoard.erase()
 		players = []
 		turn = 0
