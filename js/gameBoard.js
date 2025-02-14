@@ -1,7 +1,10 @@
 import ui from "/js/ui.js"
 
 export default (function gameBoard() {
-	let grid = ["", "", "", "", "", "", "", "", ""]
+	let grid = []
+	for (let i = 1; i <= 9; i++) {
+		grid.push(null)
+	}
 
 	const getGrid = () => grid
 
@@ -11,7 +14,7 @@ export default (function gameBoard() {
 	}
 
 	function erase() {
-		grid = grid.map(() => "")
+		grid = grid.map(() => null)
 		ui.eraseBoxes()
 	}
 
